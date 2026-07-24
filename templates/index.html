@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>EyeSee - Diabetic Retinopathy Detection</title>
+  <meta name="description" content="AI-Powered Diabetic Retinopathy Detection System">
+  <meta name="keywords" content="Diabetic Retinopathy, AI, Health, Retinal Scan">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='assets/img/408443.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Lato:wght@300;400;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{{ url_for('static', filename='assets/css/main.css') }}" rel="stylesheet">
+</head>
+
+<body class="index-page">
+
+  <!-- Header Section -->
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+
+      <a href="{{ url_for('home') }}" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">EyeSee</h1><span>.</span>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+  <ul>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+
+    {% if session.get('user') %}
+      <!-- Navigation visible ONLY when Logged In -->
+      <li><a href="{{ url_for('predict_page') }}">Analyze Image</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    {% else %}
+      <!-- Navigation visible ONLY when Logged Out -->
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      <li><a href="{{ url_for('register') }}">Register</a></li>
+    {% endif %}
+
+  </ul>
+  <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
+
+      <!-- NEW DYNAMIC VERSION -->
+{% if session.get('user') %}
+  <a class="btn-getstarted" href="{{ url_for('predict_page') }}">Analyze Image</a>
+{% else %}
+  <a class="btn-getstarted" href="{{ url_for('login') }}">Get Started</a>
+{% endif %}
+
+    </div>
+  </header>
+
+  <main class="main">
+
+  <!-- Hero Section with Background Image -->
+<section id="hero" class="hero section py-5" style="
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+              url('{{ url_for('static', filename='assets/img/person/examine.jpg') }}') center/cover no-repeat;
+  color: #ffffff;
+">
+  <div class="container text-center my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h2 class="display-4 fw-bold text-white">Welcome to EyeSee</h2>
+        <p class="lead mt-3 mb-4 text-light">
+          An advanced AI-powered detection system designed to evaluate and identify stages of Diabetic Retinopathy from retinal fundus images.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+          {% if session.get('user') %}
+            <!-- Buttons shown ONLY when Logged In -->
+            <a href="{{ url_for('predict_page') }}" class="btn btn-primary btn-lg px-4">Start Analysis</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-light btn-lg px-4">Logout</a>
+          {% else %}
+            <!-- Buttons shown ONLY when Logged Out -->
+            <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg px-4 me-md-2">Start Analysis</a>
+            <a href="{{ url_for('register') }}" class="btn btn-outline-light btn-lg px-4">Create Account</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Key Features / Info Section -->
+    <section id="features" class="section bg-light py-5">
+      <div class="container">
+        <div class="row g-4 text-center">
+          
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-4">
+              <div class="card-body">
+                <i class="bi bi-cpu text-primary fs-1 mb-3"></i>
+                <h5 class="card-title">AI Powered</h5>
+                <p class="card-text text-muted">Leverages deep learning architectures like Xception for automated feature extraction.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-4">
+              <div class="card-body">
+                <i class="bi bi-lightning-charge text-primary fs-1 mb-3"></i>
+                <h5 class="card-title">Fast Diagnosis</h5>
+                <p class="card-text text-muted">Get immediate predictions on retinal scans to accelerate clinical evaluations.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-4">
+              <div class="card-body">
+                <i class="bi bi-shield-check text-primary fs-1 mb-3"></i>
+                <h5 class="card-title">Secure Platform</h5>
+                <p class="card-text text-muted">User authentication and cloud integration ensure patient records stay protected.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+</html>

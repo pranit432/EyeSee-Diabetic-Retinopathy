@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>EyeSee - Register</title>
+  <meta name="description" content="AI-Powered Diabetic Retinopathy Detection System">
+  <meta name="keywords" content="Diabetic Retinopathy, AI, Health, Retinal Scan">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Lato:wght@300;400;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{{ url_for('static', filename='assets/css/main.css') }}" rel="stylesheet">
+</head>
+
+<body class="index-page">
+
+  <!-- Header Section -->
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+
+      <a href="{{ url_for('home') }}" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">EyeSee</h1><span>.</span>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+  <ul>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+
+    {% if session.get('user') %}
+      <!-- Navigation visible ONLY when Logged In -->
+      <li><a href="{{ url_for('predict_page') }}">Analyze Image</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    {% else %}
+      <!-- Navigation visible ONLY when Logged Out -->
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      <li><a href="{{ url_for('register') }}">Register</a></li>
+    {% endif %}
+
+  </ul>
+  <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
+
+      <!-- NEW DYNAMIC VERSION -->
+{% if session.get('user') %}
+  <a class="btn-getstarted" href="{{ url_for('predict_page') }}">Analyze Image</a>
+{% else %}
+  <a class="btn-getstarted" href="{{ url_for('login') }}">Get Started</a>
+{% endif %}
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Registration Form Section -->
+    <section id="register" class="section py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0 rounded-3 p-4 my-4">
+              <div class="card-body">
+
+                <h2 class="card-title text-center fw-bold mb-3">Create an Account</h2>
+                <p class="text-center text-muted mb-4">Register to start uploading and analyzing retinal scans.</p>
+
+                <!-- Status / Error Message Banner -->
+                {% if msg %}
+                <div class="alert alert-info text-center" role="alert">
+                  {{ msg }}
+                </div>
+                {% endif %}
+
+                <!-- Registration Form -->
+                <form action="/register" method="POST">
+
+                  <div class="mb-3">
+                    <label for="username" class="form-label font-weight-bold">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label for="email" class="form-label font-weight-bold">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="password" class="form-label font-weight-bold">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Create a secure password" required>
+                  </div>
+
+                  <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                  </div>
+
+                </form>
+
+                <div class="text-center mt-4">
+                  <p class="mb-0 text-muted">
+                    Already have an account? <a href="{{ url_for('login') }}" class="text-primary text-decoration-none fw-semibold">Login here</a>
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+</html>

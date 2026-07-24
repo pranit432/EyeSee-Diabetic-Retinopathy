@@ -1,0 +1,19 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# Environment / Secret keys
+.env
+
+# Uploaded images (keeps directory clean)
+uploads/*
+!uploads/.gitkeep
+
+# IDE configuration
+.vscode/
+.idea/

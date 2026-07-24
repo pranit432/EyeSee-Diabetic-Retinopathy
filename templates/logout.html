@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>EyeSee - Logged Out</title>
+  <meta name="description" content="AI-Powered Diabetic Retinopathy Detection System">
+  <meta name="keywords" content="Diabetic Retinopathy, AI, Health, Retinal Scan">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Lato:wght@300;400;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{{ url_for('static', filename='assets/css/main.css') }}" rel="stylesheet">
+</head>
+
+<body class="index-page">
+
+  <!-- Header Section -->
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+
+      <a href="{{ url_for('home') }}" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">EyeSee</h1><span>.</span>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+  <ul>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+
+    {% if session.get('user') %}
+      <!-- Navigation visible ONLY when Logged In -->
+      <li><a href="{{ url_for('predict_page') }}">Analyze Image</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    {% else %}
+      <!-- Navigation visible ONLY when Logged Out -->
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      <li><a href="{{ url_for('register') }}">Register</a></li>
+    {% endif %}
+
+  </ul>
+  <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
+
+      <!-- NEW DYNAMIC VERSION -->
+{% if session.get('user') %}
+  <a class="btn-getstarted" href="{{ url_for('predict_page') }}">Analyze Image</a>
+{% else %}
+  <a class="btn-getstarted" href="{{ url_for('login') }}">Get Started</a>
+{% endif %}
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Logout Confirmation Section -->
+    <section id="logout" class="section py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0 rounded-3 p-4 my-4 text-center">
+              <div class="card-body">
+
+                <div class="mb-3">
+                  <i class="bi bi-check-circle-fill text-success display-3"></i>
+                </div>
+
+                <h2 class="card-title fw-bold mb-3">Logged Out</h2>
+                <p class="text-muted mb-4">You have been successfully logged out of your account.</p>
+
+                <div class="d-grid gap-2 col-10 mx-auto">
+                  <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">Log Back In</a>
+                  <br>
+                  <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">Return to Home</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+</body>
+</html>
